@@ -1,0 +1,15 @@
+import type { Plugin } from '@envelop/core';
+import { ContextType } from '../types';
+
+export const useResponseMetadata = (): Plugin<ContextType> => {
+  return {
+    onExecuteDone: async ({ result, context }) => {
+      return {
+        ...result,
+        metadata: {
+          requestId: context.requestId,
+        },
+      };
+    },
+  };
+};
