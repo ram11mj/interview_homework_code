@@ -5,18 +5,18 @@ import { ContextType } from '../types';
 
 export const buildHeaders = (): Plugin<ContextType> => {
   return {
-    onExecute({ extendContext, context }) {
-      // Ticket 4 → always generate requestId
+    onExecute({ context, extendContext }) {
+      // ---- Ticket 4: Generate requestId ----
       const requestId = uuid();
 
-      // Ticket 3 → validate required "client" header
-      const client = context?.request?.headers?.get('client');
+      // ---- Ticket 3: Required "client" header ----
+      const client = context.request?.headers?.get("client");
 
       if (!client) {
         throw new GraphQLError("Missing required 'client' header");
       }
 
-      // Add both to the execution context
+      // Add both to context
       extendContext({
         requestId,
         client,

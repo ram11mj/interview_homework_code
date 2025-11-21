@@ -1,5 +1,4 @@
-import { getAddress } from './address';
-import { createAddress } from './mutations';
+import { getAddress, createAddress } from './address';
 
 export const resolvers = {
   Query: {
